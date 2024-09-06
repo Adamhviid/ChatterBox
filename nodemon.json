@@ -1,5 +1,5 @@
 {
-  "watch": ["server.js", "src/", "build/"],
+  "watch": ["server.js", "./src", "build/"],
   "ext": "js,json",
   "ignore": ["node_modules/"],
   "exec": "node --experimental-modules server.js"

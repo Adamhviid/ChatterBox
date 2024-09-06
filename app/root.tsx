@@ -4,6 +4,7 @@ import type { Socket } from "socket.io-client";
 import io from "socket.io-client";
 
 import { SocketProvider } from "~/context";
+import "./App.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,7 +31,7 @@ export default function App() {
   const [socket, setSocket] = useState<Socket>();
 
   useEffect(() => {
-    const socket = io(); // Ensure this points to your server URL if needed
+    const socket = io();
 
     setSocket(socket);
 
