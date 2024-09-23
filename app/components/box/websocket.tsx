@@ -10,6 +10,10 @@ interface WebsocketProps {
 const Websocket: React.FC<WebsocketProps> = ({ box, initialMessages }) => {
   const { messages, sendMessage } = useWebSocket(box, initialMessages);
 
+  if (!box) {
+    return <div>Error: Box parameter is missing.</div>;
+  }
+
   return (
     <div className="font-sans leading-7">
       <h1>current box: {box}</h1>

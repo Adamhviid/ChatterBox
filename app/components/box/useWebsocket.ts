@@ -16,7 +16,17 @@ export const useWebSocket = (box: string, initialMessages: Message[]) => {
   const [messages, setMessages] = useState([...initialMessages]);
 
   useEffect(() => {
-    if (!socket) return;
+    if (!socket || !box) return;
+
+    const handleConnectionMessages = (data: SocketData[]) => {
+      const formattedMessages = formatMessages(data);
+      setMessages((prevMessages) => [...prevMessages, ...formattedMessages]);
+    };
+
+    const handleMessage = (data: SocketData) => {
+      const formattedMessage = { ...data, message: data.message || "", box };
+      setMessages((prevMessages) => [...prevMessages, formattedMessage]);
+    };
 
     socket.on("connection_messages", handleConnectionMessages);
     socket.on("message", handleMessage);
@@ -26,16 +36,6 @@ export const useWebSocket = (box: string, initialMessages: Message[]) => {
       socket.off("message", handleMessage);
     };
   }, [socket, box]);
-
-  const handleConnectionMessages = (data: SocketData[]) => {
-    const formattedMessages = formatMessages(data);
-    setMessages((prevMessages) => [...prevMessages, ...formattedMessages]);
-  };
-
-  const handleMessage = (data: SocketData) => {
-    const formattedMessage = { ...data, message: data.message || "", box };
-    setMessages((prevMessages) => [...prevMessages, formattedMessage]);
-  };
 
   const formatMessages = (data: SocketData[]) => {
     return data.map((msg) => ({
