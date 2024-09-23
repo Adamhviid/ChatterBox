@@ -1,5 +1,5 @@
 import React from "react";
-import Messaging from "./Messaging";
+import Messaging from "./messaging";
 import { useWebSocket } from "./useWebsocket";
 
 interface WebsocketProps {

@@ -23,3 +23,6 @@ export default function Index() {
     </div>
   );
 }
+
+//TODO
+//https://ui.shadcn.com/docs/installation/remix
